@@ -1,10 +1,9 @@
 import './App.css';
+import ParentProps from './components/01.Props/01_Basic/parent';
 
 function App() {
   return (
-    <div className="App">
-      <p>Tsx App!</p>
-    </div>
+    <ParentProps />
   );
 }
 
