@@ -20,3 +20,9 @@
 .tourist-flex-item span:nth-child(2){
     width: 10%;
 }
+
+.tourist-detail{
+    background-color: cadetblue;
+    margin: 10px;
+    padding: 10px;
+}

@@ -1,46 +1,57 @@
-# Getting Started with Create React App
+INTERVIEW  QUESTIONS:
+====================
+1. What is Real DOM and Virtual DOM?
+> Virtual DOM: It means it will create a copy of real DOM. If we have any state updates then particular nodes will be updated rather than update entire DOM structure. So with this performance is very high. React is a virtual DOM.
+> Real DOM: It means whatever we are seeing on the webpage that is real DOM. whenever virtual DOM is updated automatically Real DOM will update and we can see the changes in the webpage. 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+2. Folder structure:
+> node_modules, public, src, package.json
+> node_modules: all the dependencies libraries available in node_modules folder. For Ex: If we are using bootstrap those dependencies needs to add into our project, then we need to use npm i bootstrap then related dependencies downloaded and its available in node_modules folder.
+> src: src constist of all the source code which are related to our project.
+> package.json: all the dependencies available in package.json. So as per package.json our node_modules will be downloaded.
 
-## Available Scripts
+3. What is JSX?
+> JSX stands for JavaScript XML.
+> JSX is used to write HTML code in our react.
+> JSX converts HTML tags into react elements.
+> You are not required to use JSX, but JSX makes it easier to write React applications in HTML code.
 
-In the project directory, you can run:
+Ex: 
+const myElement = React.createElement('h1', {}, 'I do not use JSX!');
 
-### `npm start`
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(myElement);
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+4. What is React Fragment/Fragment?
+> If we have multiple HTML elements we need to enclose with one main element then it is known as Fragment. If we are not using Fragment we will get an error.
+> we can Fragment with empty angular brackets or we can use HTML Element like DIV
+> If we are using Empty angular brackets in DOM that empty tag won't display and If you want to apply any internal styles or apply class it won't possible with empty angular brackets
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Ex: 
+  <> // <div>   -> Fragment we can enclose with empty brackets or DIV
+    <h1>Heading</h1>
+    <p>Paragraph</p>
+  </> //</div>
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. What is binding?
+> Binding is nothing but placeholder of the variable, we can defined bind with single flower brackets, in between the single curly braces we can place variable name. so whatever content it is there in the variable those will be displayed on the webpage.
 
-### `npm run build`
+6. useState or How to update the state?
+> By using useState we can update the state. useState is a react hook. The syntax is wrap of sqaure brackets and need to specify variable name and update variable name.
+> Whenever state is updated then our DOM will update (re-render)
+Ex: const [userName, setUserName] = useState('');
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+7. What is props (How to share data b/w parent-child or child-parent)
+> Props is used to share the data from parent to child or child to parent.
+> How to use means in the ChildComponent selector we need to specify what we are sending to the child and at the sametime if we have any events (can specify events which are coming from child) from child to parent those are also specify in ChildComponent selector.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+JUST KNOWN:
+============
+1. npx create-react-app app-name -> To create the project
+2. npm i/install -> To install package.json dependencies
+3. npm start -> To compile our application
+4. npm run custom-script-name -> To customise the script 
+(Ex: "start-server" : "react-scripts start") => Inorder to run the command we need to use npm run start-server.
+5. JSX HTML <tags/>
+6. React is a component based, one is class component and other is functional component.

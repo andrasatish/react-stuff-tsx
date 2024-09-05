@@ -1,7 +1,7 @@
 import { useState } from "react";
-import ChildComponent from "./child";
+import ChildComponent, { ChangeDetails } from "./child";
 
-interface UserDetail {
+export interface UserDetail {
     name:string;
     age: number; 
     location:string; 
@@ -47,6 +47,15 @@ const ParentProps = () => {
     const [userData, setUserData] = useState<UserDetail | null>({name:'Sudheer',designation:'Software',age:28,location:'Hyderabad'});
     const [touristData, setTouristData] = useState<TouristDetail[]>(touristInitialData);
 
+    const handleChangeFromChild = (details:ChangeDetails, data:string) => {
+        console.log('Child Clicked', details, data);
+        setName(details.nameData);
+        setIsAdult(details.adultFlag);
+        setUserData(details.userData);
+        const arrayCombined = [...touristData, details.touristList] //details.touristList
+        setTouristData(arrayCombined);
+    }
+
     return (
         <>
             <h1>Parent Props</h1>
@@ -55,7 +64,8 @@ const ParentProps = () => {
                 empId={empoyeeId} 
                 adultStatus={isAdult} 
                 userList={userData} 
-                touristData={touristData}/>
+                touristData={touristData}
+                dataChanges={handleChangeFromChild}/>
         </>
     )
 }
