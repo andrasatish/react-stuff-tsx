@@ -1,8 +1,21 @@
 import {Input, InputNumber, Select, Radio, Checkbox, Form, Button, Space} from 'antd';
+import { useEffect } from 'react';
 
 const TouristForm = (props:any) => {
-    const { statesList, genderOptions, genderData, placeTypeList, editedObj } = props;
+    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData } = props;
     const [form] = Form.useForm();
+
+    useEffect(()=>{
+        const { name,location, age, state, gender, placeType } = editedObj;
+        form.setFieldsValue({
+            name: name,
+            location: location,
+            age: age,
+            state: state,
+            gender: gender,
+            placeType: placeType
+        })
+    }, [editedObj]);
 
 
     const onGenderChange = ({ target: { value } }: any) => {
@@ -10,11 +23,13 @@ const TouristForm = (props:any) => {
     }
 
     const onSubmit = () => {
-
+        const addTouristObj = { ...form.getFieldsValue(), id: Math.random().toString(16).slice(2) }
+        sendTouristData(addTouristObj);
+        form.resetFields();
     }
 
     const onUpdate = () => {
-        
+
     }
 
     return (<>

@@ -46,6 +46,11 @@ Ex: const [userName, setUserName] = useState('');
 > Props is used to share the data from parent to child or child to parent.
 > How to use means in the ChildComponent selector we need to specify what we are sending to the child and at the sametime if we have any events (can specify events which are coming from child) from child to parent those are also specify in ChildComponent selector.
 
+8. what is side effect or useEffect?
+> useEffect is a functional hook. It is used for side effects. It will take two parameters first one is a callback function and second is a dependency.
+> Dependency should be an array and If you mention empty array whenever our page gets loaded on this time it will call and it will call only one time. If you mention any dependency, whenever that dependency is updated then automatically useEffect will call.
+> If you want to call any API's for the intialization then we need to use useEffect.
+
 JUST KNOWN:
 ============
 1. npx create-react-app app-name -> To create the project
