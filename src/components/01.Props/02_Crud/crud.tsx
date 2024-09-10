@@ -3,6 +3,7 @@ import TouristForm from './tourist-form/tourist-form';
 import { GenderList, PlaceType, StatesList } from '../../model/tourist';
 import './crud.css';
 import TableContainer from './table-container/table-container';
+import TouristModal from './tourist-modal/tourist-modal';
 
 const CrudWrapper = () => {
     const statesList: StatesList[] = [{ label: 'Telangana', value: 'TL' }, { label: 'Andhra Pradesh', value: 'AP' }, { label: 'Delhi', value: 'Delhi' }];
@@ -11,19 +12,28 @@ const CrudWrapper = () => {
     const [genderData, setGender] = useState<string>('male');
     const [editedObj, setEditedObj] = useState({});
     const [touristList, setTouristList] = useState<any>([]);
-
-    useEffect(()=>{
-        console.log('touristList parent :: ', touristList, editedObj);
-        //call API -> reponse -> updated to state
-    },[touristList, editedObj]);
+    const [newTouristDetails, setNewTouristDetails] = useState<any>();
 
     const handleNewTouristData = (touristObj:any) => {
         setTouristList([touristObj, ...touristList]);
+        setNewTouristDetails(touristObj);
     }
 
     const handleEditedTourist = (editTouristData:any) => {
-        console.log('EDITED FIELD DATA', editTouristData);
         setEditedObj(editTouristData);
+    }
+
+    const handleDeleteTourist = (tourist:any) => {
+        const filterTourist  = touristList.filter((touristData:any)=> touristData.id !== tourist.id)
+        setTouristList(filterTourist);
+    }
+
+    const handleUpdateTourist = (tourist:any) => {
+        const updatedTourist = touristList.map((touristData:any)=> {
+            return touristData.id === tourist.id ? tourist : touristData; 
+        })
+        setTouristList(updatedTourist);
+        setEditedObj({});
     }
 
     return (
@@ -41,10 +51,14 @@ const CrudWrapper = () => {
                     placeTypeList={placeTypeList}
                     editedObj={editedObj}
                     sendTouristData={handleNewTouristData}
+                    updateTourist={handleUpdateTourist}
                 />
                 <TableContainer 
                     touristList={touristList}
-                    editedTourst={handleEditedTourist}/>
+                    editedTourst={handleEditedTourist}
+                    deleteTourist={handleDeleteTourist}/>
+
+                <TouristModal newTouristDetails={newTouristDetails}/>
             </div>
         </>
     )

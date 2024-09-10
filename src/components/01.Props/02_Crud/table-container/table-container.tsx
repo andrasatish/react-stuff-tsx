@@ -2,19 +2,14 @@ import { useEffect } from "react";
 import { Button, Space } from 'antd';
 
 const TableContainer = (props:any) => {
-    const { touristList, editedTourst } = props;
-
-    useEffect(()=>{
-        console.log('TABLE CONTAINER', touristList)
-    },[touristList])
+    const { touristList, editedTourst, deleteTourist } = props;
 
     const onEdit = (touristData:any) => {
-        console.log('ON EDITE', touristData);
         editedTourst(touristData);
     }
 
     const onDelete = (touristData:any) => {
-        console.log('ON DELETE', touristData);
+        deleteTourist(touristData);
     }
 
 

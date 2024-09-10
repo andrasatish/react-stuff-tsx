@@ -2,7 +2,7 @@ import {Input, InputNumber, Select, Radio, Checkbox, Form, Button, Space} from '
 import { useEffect } from 'react';
 
 const TouristForm = (props:any) => {
-    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData } = props;
+    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist } = props;
     const [form] = Form.useForm();
 
     useEffect(()=>{
@@ -29,11 +29,16 @@ const TouristForm = (props:any) => {
     }
 
     const onUpdate = () => {
-
+        const updatedTouristDetail = {...form.getFieldsValue(), id: editedObj.id};
+        updateTourist(updatedTouristDetail);
+        form.resetFields();
     }
 
     return (<>
             <div className='curd-item-container'>
+                    <div>
+                        <h2> {editedObj?.id ? 'Edit' : 'Add'} Tourist Details</h2>
+                    </div>
                     <Form
                         name="basic"
                         labelCol={{ span: 6 }}
