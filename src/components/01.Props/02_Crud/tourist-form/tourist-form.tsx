@@ -2,7 +2,7 @@ import {Input, InputNumber, Select, Radio, Checkbox, Form, Button, Space} from '
 import { useEffect } from 'react';
 
 const TouristForm = (props:any) => {
-    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist } = props;
+    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist, modalStatus } = props;
     const [form] = Form.useForm();
 
     useEffect(()=>{
@@ -17,6 +17,12 @@ const TouristForm = (props:any) => {
         })
     }, [editedObj]);
 
+    useEffect(()=>{
+        if(modalStatus === 'OK'){
+            form.resetFields();
+        }
+    },[modalStatus]);
+
 
     const onGenderChange = ({ target: { value } }: any) => {
         // setGender(value)
@@ -25,7 +31,6 @@ const TouristForm = (props:any) => {
     const onSubmit = () => {
         const addTouristObj = { ...form.getFieldsValue(), id: Math.random().toString(16).slice(2) }
         sendTouristData(addTouristObj);
-        form.resetFields();
     }
 
     const onUpdate = () => {

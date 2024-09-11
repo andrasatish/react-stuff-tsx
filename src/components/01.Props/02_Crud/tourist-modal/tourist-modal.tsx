@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd';
 
 const TouristModal = (props:any) => {
-  const { newTouristDetails } = props;
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  useEffect(()=>{
-    newTouristDetails && setIsModalOpen(true);
-  },[newTouristDetails]);
+  const { newTouristDetails, modalHandler, isModalOpen } = props;
 
   const handleOk = () => {
-    setIsModalOpen(false);
+    modalHandler('OK');
   };
 
   const handleCancel = () => {
-    setIsModalOpen(false);
+    modalHandler('CANCEL');
   };
 
   return (

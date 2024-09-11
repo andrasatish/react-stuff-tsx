@@ -13,10 +13,12 @@ const CrudWrapper = () => {
     const [editedObj, setEditedObj] = useState({});
     const [touristList, setTouristList] = useState<any>([]);
     const [newTouristDetails, setNewTouristDetails] = useState<any>();
+    const [modalStatus, setModalStatus] = useState<any>();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const handleNewTouristData = (touristObj:any) => {
-        setTouristList([touristObj, ...touristList]);
         setNewTouristDetails(touristObj);
+        setIsModalOpen(true);
     }
 
     const handleEditedTourist = (editTouristData:any) => {
@@ -36,6 +38,18 @@ const CrudWrapper = () => {
         setEditedObj({});
     }
 
+    const modalHandler = (event:any) => {
+        //event -> OK, CANCEL
+        if(event === 'OK'){
+            setTouristList([newTouristDetails, ...touristList]);
+            setModalStatus(event);
+        }
+        setTimeout(()=>{
+            setModalStatus(null);
+        },1000);
+        setIsModalOpen(false);
+    }
+
     return (
         <>
             {/* Form
@@ -52,13 +66,14 @@ const CrudWrapper = () => {
                     editedObj={editedObj}
                     sendTouristData={handleNewTouristData}
                     updateTourist={handleUpdateTourist}
+                    modalStatus={modalStatus}
                 />
                 <TableContainer 
                     touristList={touristList}
                     editedTourst={handleEditedTourist}
                     deleteTourist={handleDeleteTourist}/>
 
-                <TouristModal newTouristDetails={newTouristDetails}/>
+                <TouristModal newTouristDetails={newTouristDetails} modalHandler={modalHandler} isModalOpen={isModalOpen}/>
             </div>
         </>
     )
