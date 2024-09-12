@@ -1,21 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Modal } from 'antd';
+import { Modal } from 'antd';
 
 const TouristModal = (props:any) => {
-  const { newTouristDetails, modalHandler, isModalOpen } = props;
+  const { modalHandler, isModalOpen, modalTitle, action } = props;
 
   const handleOk = () => {
-    modalHandler('OK');
+    modalHandler({
+      actionButtonValue : 'OK',
+      action: action
+    });
+    // modalHandler('OK',action);
   };
 
   const handleCancel = () => {
-    modalHandler('CANCEL');
+    modalHandler({
+        actionButtonValue : 'CANCEL',
+        action: action
+    });
   };
 
   return (
     <>
       <Modal 
-        title={`Are you sure want to submit the details of ${newTouristDetails?.name ? newTouristDetails?.name : ''}?`} 
+        title={modalTitle} 
         open={isModalOpen} 
         onOk={handleOk} 
         onCancel={handleCancel}>

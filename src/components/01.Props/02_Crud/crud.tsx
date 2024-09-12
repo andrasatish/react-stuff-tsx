@@ -4,6 +4,7 @@ import { GenderList, PlaceType, StatesList } from '../../model/tourist';
 import './crud.css';
 import TableContainer from './table-container/table-container';
 import TouristModal from './tourist-modal/tourist-modal';
+import TouristAlert from './tourist-alert/tourist-alert';
 
 const CrudWrapper = () => {
     const statesList: StatesList[] = [{ label: 'Telangana', value: 'TL' }, { label: 'Andhra Pradesh', value: 'AP' }, { label: 'Delhi', value: 'Delhi' }];
@@ -15,10 +16,18 @@ const CrudWrapper = () => {
     const [newTouristDetails, setNewTouristDetails] = useState<any>();
     const [modalStatus, setModalStatus] = useState<any>();
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalTitle, setModalTitle] = useState<any>(); 
+    const [action, setAction] = useState<any>();
+    const [updateTouristDetails, setUpdateTouristDetails] = useState<any>();
+    const [deleteTouristDetails, setDeleteTouristDetails] = useState<any>();
+    const [alertTitle, setAlertTitle] = useState<string>('');
+    const [alertOpen, setAlertOpen] = useState<boolean>(false);
 
     const handleNewTouristData = (touristObj:any) => {
         setNewTouristDetails(touristObj);
         setIsModalOpen(true);
+        setModalTitle(`Are you sure want to submit the details of ${touristObj?.name}?`);
+        setAction('SUBMIT');
     }
 
     const handleEditedTourist = (editTouristData:any) => {
@@ -26,27 +35,47 @@ const CrudWrapper = () => {
     }
 
     const handleDeleteTourist = (tourist:any) => {
-        const filterTourist  = touristList.filter((touristData:any)=> touristData.id !== tourist.id)
-        setTouristList(filterTourist);
+        setIsModalOpen(true);
+        setModalTitle(`Are you sure want to delete the details of ${tourist?.name}?`);
+        setAction('DELETE');
+        setDeleteTouristDetails(tourist);
     }
 
     const handleUpdateTourist = (tourist:any) => {
-        const updatedTourist = touristList.map((touristData:any)=> {
-            return touristData.id === tourist.id ? tourist : touristData; 
-        })
-        setTouristList(updatedTourist);
-        setEditedObj({});
+        setIsModalOpen(true);
+        setModalTitle(`Are you sure want to update tourist: ${tourist.name}`);
+        setAction('UPDATE');
+        setUpdateTouristDetails(tourist);
     }
 
     const modalHandler = (event:any) => {
         //event -> OK, CANCEL
-        if(event === 'OK'){
+        //event -> {"actionButtonValue": "OK", "action": "SUBMIT"}
+        if(event.actionButtonValue === 'OK' && event.action === 'SUBMIT'){
             setTouristList([newTouristDetails, ...touristList]);
-            setModalStatus(event);
+            setAlertTitle('Details saved successfully!');
+            setAlertOpen(true);
         }
+        if(event.actionButtonValue === 'OK' && event.action === 'UPDATE'){
+            const updatedTourist = touristList.map((touristData:any)=> {
+                return touristData.id === updateTouristDetails.id ? updateTouristDetails : touristData; 
+            })
+            setTouristList(updatedTourist);
+            setAlertTitle('Details updated successfully!');
+            setAlertOpen(true);
+            setEditedObj({});
+        }
+        if(event.actionButtonValue === 'OK' && event.action === 'DELETE'){
+            const filterTourist  = touristList.filter((touristData:any)=> touristData.id !== deleteTouristDetails.id)
+            setTouristList(filterTourist);
+            setAlertTitle('Details deleted successfully!');
+            setAlertOpen(true);
+        }
+        setModalStatus(event.actionButtonValue); //OK,CANCEL
         setTimeout(()=>{
             setModalStatus(null);
-        },1000);
+            setAlertOpen(false);
+        });
         setIsModalOpen(false);
     }
 
@@ -73,7 +102,14 @@ const CrudWrapper = () => {
                     editedTourst={handleEditedTourist}
                     deleteTourist={handleDeleteTourist}/>
 
-                <TouristModal newTouristDetails={newTouristDetails} modalHandler={modalHandler} isModalOpen={isModalOpen}/>
+                <TouristModal 
+                    modalTitle={modalTitle}  
+                    action={action}
+                    modalHandler={modalHandler} 
+                    isModalOpen={isModalOpen}/>
+
+                <TouristAlert alertTitle={alertTitle} alertOpen={alertOpen} />
+
             </div>
         </>
     )

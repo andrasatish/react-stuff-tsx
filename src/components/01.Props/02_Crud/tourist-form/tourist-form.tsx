@@ -36,7 +36,6 @@ const TouristForm = (props:any) => {
     const onUpdate = () => {
         const updatedTouristDetail = {...form.getFieldsValue(), id: editedObj.id};
         updateTourist(updatedTouristDetail);
-        form.resetFields();
     }
 
     return (<>
