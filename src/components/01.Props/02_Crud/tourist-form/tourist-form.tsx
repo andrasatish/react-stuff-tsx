@@ -2,19 +2,21 @@ import {Input, InputNumber, Select, Radio, Checkbox, Form, Button, Space} from '
 import { useEffect } from 'react';
 
 const TouristForm = (props:any) => {
-    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist, modalStatus } = props;
+    const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist, modalStatus, buttonAction } = props;
     const [form] = Form.useForm();
 
     useEffect(()=>{
-        const { name,location, age, state, gender, placeType } = editedObj;
-        form.setFieldsValue({
-            name: name,
-            location: location,
-            age: age,
-            state: state,
-            gender: gender,
-            placeType: placeType
-        })
+        if(editedObj && buttonAction === 'EDIT'){
+            const { name,location, age, state, gender, placeType } = editedObj;
+            form.setFieldsValue({
+                name: name,
+                location: location,
+                age: age,
+                state: state,
+                gender: gender,
+                placeType: placeType
+            })    
+        }
     }, [editedObj]);
 
     useEffect(()=>{
@@ -115,7 +117,7 @@ const TouristForm = (props:any) => {
                                 // update -> editedObj has data */}
 
                                 {
-                                    Object.keys(editedObj).length === 0 ? (<Button type="primary" onClick={onSubmit}>
+                                    !buttonAction || buttonAction === 'SUBMIT' ? (<Button type="primary" onClick={onSubmit}>
                                         Submit
                                     </Button>) : (<Button type="primary" onClick={onUpdate}>
                                         Update

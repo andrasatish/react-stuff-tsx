@@ -4,13 +4,13 @@ import './tourist-alert.css';
 
 const TouristAlert = (props: any) => {
     const [api, contextHolder] = notification.useNotification();
-    const { alertTitle, alertOpen } = props;
+    const { alertData } = props;
 
-    useEffect(() => {
-        if (alertOpen) {
-            openNotificationWithIcon(alertTitle)
+    useEffect(()=>{
+        if (alertData.alertOpen) {
+            openNotificationWithIcon(alertData.title)
         }
-    }, [alertOpen])
+    },[alertData])
 
 
     const openNotificationWithIcon = (alertTitle: string) => {

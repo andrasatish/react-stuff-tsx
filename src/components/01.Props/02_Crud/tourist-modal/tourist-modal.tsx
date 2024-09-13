@@ -1,7 +1,13 @@
 import { Modal } from 'antd';
 
-const TouristModal = (props:any) => {
-  const { modalHandler, isModalOpen, modalTitle, action } = props;
+interface TouristProps {
+  modalHandler : any;
+  modalConfig: any;
+}
+
+const TouristModal = (props:TouristProps) => {
+  const { modalHandler, modalConfig } = props;
+  const { modalTitle, action, isModalOpen } = modalConfig;
 
   const handleOk = () => {
     modalHandler({
