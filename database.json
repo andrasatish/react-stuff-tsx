@@ -1,0 +1,40 @@
+{
+  "states": [
+    {
+      "label": "Telangana",
+      "value": "TL",
+      "id": "81c5"
+    },
+    {
+      "label": "Secundrabad",
+      "value": "SC",
+      "id": "e587"
+    },
+    {
+      "label": "Delhi",
+      "value": "Delhi",
+      "id": "541f"
+    }
+  ],
+  "gender": [
+    {
+      "label": "Male",
+      "value": "male"
+    },
+    {
+      "label": "Female",
+      "value": "female"
+    }
+  ],
+  "placeTypes": [
+    {
+      "label": "Public Visit",
+      "value": "public"
+    },
+    {
+      "label": "Priavate Visit",
+      "value": "private"
+    }
+  ],
+  "touristList": []
+}
