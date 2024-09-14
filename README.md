@@ -51,6 +51,9 @@ Ex: const [userName, setUserName] = useState('');
 > Dependency should be an array and If you mention empty array whenever our page gets loaded on this time it will call and it will call only one time. If you mention any dependency, whenever that dependency is updated then automatically useEffect will call.
 > If you want to call any API's for the intialization then we need to use useEffect.
 
+9. contextAPI or useContext/useProvider?
+
+
 JUST KNOWN:
 ============
 1. npx create-react-app app-name -> To create the project
