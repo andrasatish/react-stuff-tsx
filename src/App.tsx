@@ -5,6 +5,7 @@ import CrudWrapper from './components/01.Props/02_Crud/crud';
 import PropsNested from './components/03.props-drilling/props-nested';
 import Admin from './components/04.userdata-context/admin/admin';
 import { CompanyProvider } from './components/04.userdata-context/context/companyPortalContext';
+import TouristContainer from './components/04.userdata-context/tourist-detail-context/tourist-contianer';
 
 function App() {
   const [username, setUsername] = useState('SUDHEER');
@@ -24,9 +25,13 @@ function App() {
     //   <h2>App Componet End...</h2>
          
     // </>
-    <CompanyProvider>
-      <Admin />
-    </CompanyProvider>
+
+    // Context
+    // <CompanyProvider>
+    //   <Admin />
+    // </CompanyProvider>
+
+    <TouristContainer />
   );
 }
 

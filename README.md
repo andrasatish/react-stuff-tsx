@@ -52,6 +52,9 @@ Ex: const [userName, setUserName] = useState('');
 > If you want to call any API's for the intialization then we need to use useEffect.
 
 9. contextAPI or useContext/useProvider?
+ > We can manage the state at one place and we can wrap that context provider as the parent element and we can manager the state with in that level that means we can access the state varialbe and we can able to set the data to the state.
+ > Using useContext hook we can access the context state. useProvider is used to wrap the child elements so that we can manage the state in that level.
+ > How to create context API means we can use createContext and we can store in one variable and we can create one callback function which is related to Provider and both context and provider we have export it then we can use it in other components.
 
 
 JUST KNOWN:
