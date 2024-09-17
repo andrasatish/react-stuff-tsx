@@ -4,7 +4,7 @@ import { TouristContext } from "../touristContext";
 
 const TouristTable = () => {
 
-    const { touristList, setEditedObj, setTouristList, modalActions, modalConfig, setModalConfig, setModalActions, editedObj } = useContext<any>(TouristContext);
+    const { touristList, setEditedObj, setTouristList, modalActions, modalConfig, setModalConfig, setModalActions, setAlertData } = useContext<any>(TouristContext);
 
     const onEdit = (touristData: any) => {
         setEditedObj(touristData);
@@ -23,29 +23,46 @@ const TouristTable = () => {
         if (modalActions && modalActions === 'OK') {
             switch (modalConfig?.action) {
                 case 'SUBMIT':
-                    const newData = [modalConfig.data, ...touristList];
+                    const updateDataWithId = { ...modalConfig.data, id: Math.floor(Math.random() * 1000) };
+                    const newData = [updateDataWithId, ...touristList];
                     setTouristList(newData);
+                    setAlertData({
+                        alertOpen : true,
+                        title: `${modalConfig.data.name} details saved successfully!!`
+                    });
                     break;
                 case 'UPDATE':
+                    console.log('UPDATED DETAILS ', touristList, modalConfig)
                     const updatedTouristData = touristList.map((tourist: any) => {
-                        if (tourist.id === editedObj.id) {
+                        if (tourist.id === modalConfig.data.id) {
                             return modalConfig?.data
                         } else {
                             return tourist;
                         }
                     })
                     setTouristList(updatedTouristData);
+                    setAlertData({
+                        alertOpen : true,
+                        title: `${modalConfig.data.name} details updated successfully!!`
+                    });
                     setEditedObj(null);
                     break;
                 case 'DELETE':
                     const updatedTourists = touristList.filter((tourist: any) => tourist.id !== modalConfig.data.id);
                     setTouristList(updatedTourists);
+                    setAlertData({
+                        alertOpen : true,
+                        title: `${modalConfig.data.name} details deleted successfully!!`
+                    });
                     break;
                 default:
                     console.log('Related Actions not performed!!');
             }
-            setModalConfig();
-            setModalActions();
+            setTimeout(()=>{
+                setModalConfig();
+                setModalActions();
+                setAlertData();
+            },500);
         }
     }, [modalActions, modalConfig])
 

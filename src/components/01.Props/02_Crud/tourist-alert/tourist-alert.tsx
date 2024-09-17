@@ -7,7 +7,7 @@ const TouristAlert = (props: any) => {
     const { alertData } = props;
 
     useEffect(()=>{
-        if (alertData.alertOpen) {
+        if (alertData?.alertOpen) {
             openNotificationWithIcon(alertData.title)
         }
     },[alertData])

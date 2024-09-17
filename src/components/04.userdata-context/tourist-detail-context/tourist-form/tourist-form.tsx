@@ -50,7 +50,7 @@ const TouristForm = () => {
             modalTitle: `Do you want to update the tourist details of ${form.getFieldsValue()?.name}?`,
             isModalOpen: true,
             action: 'UPDATE',
-            data: form.getFieldsValue()
+            data: { ...form.getFieldsValue(), id: editedObj.id},
         })
     }
 

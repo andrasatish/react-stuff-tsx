@@ -1,13 +1,13 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { notification } from 'antd';
-import './tourist-alert.css';
+import { TouristContext } from '../touristContext';
 
-const TouristAlert = (props: any) => {
+const TouristAlert = () => {
     const [api, contextHolder] = notification.useNotification();
-    const { alertData } = props;
+    const { alertData } = useContext<any>(TouristContext);
 
     useEffect(()=>{
-        if (alertData.alertOpen) {
+        if (alertData?.alertOpen) {
             openNotificationWithIcon(alertData.title)
         }
     },[alertData])
