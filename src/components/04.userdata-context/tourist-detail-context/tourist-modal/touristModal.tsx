@@ -8,12 +8,19 @@ interface TouristProps {
 }
 
 const TouristModal = () => {
-  const { modalConfig } = useContext<any>(TouristContext);
+  const { modalConfig, setModalConfig, setModalActions } = useContext<any>(TouristContext);
 
   const handleOk = () => {
+      console.log('modalConfig :::: ', modalConfig);
+      setModalActions('OK');
   };
 
   const handleCancel = () => {
+    setModalConfig({
+        modalTitle: null,
+        isModalOpen: false
+       })
+    setModalActions('CANCEL');
   };
 
   return (

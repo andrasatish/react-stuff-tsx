@@ -7,13 +7,14 @@ export const TouristProvider:FC<{children:ReactNode}> = ({children}) => {
     const [ touristList, setTouristList ] = useState<any>([]);
     const [ editedObj, setEditedObj ] = useState<any>();
     const [ modalConfig, setModalConfig ] = useState<any>();
+    const [ modalActions, setModalActions ] = useState<any>();
 
     // useEffect(()=>{
     //     console.log('deletedObj Tourist List Data', deletedObj);
     // },[deletedObj]);
 
     return (
-        <TouristContext.Provider value={ {touristList, setTouristList, editedObj, setEditedObj, modalConfig, setModalConfig} }>{children}</TouristContext.Provider>
+        <TouristContext.Provider value={ {touristList, setTouristList, editedObj, setEditedObj, modalConfig, setModalConfig, modalActions, setModalActions} }>{children}</TouristContext.Provider>
     )
 }
 
