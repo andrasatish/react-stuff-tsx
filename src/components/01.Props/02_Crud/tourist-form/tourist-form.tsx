@@ -1,9 +1,15 @@
 import {Input, InputNumber, Select, Radio, Checkbox, Form, Button, Space} from 'antd';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const TouristForm = (props:any) => {
     const { statesList, genderOptions, genderData, placeTypeList, editedObj, sendTouristData, updateTourist, modalStatus, buttonAction } = props;
     const [form] = Form.useForm();
+
+    const [ stateData, setStateData] = useState(statesList);
+
+    useEffect(()=>{
+        setStateData([{ label: 'Telangana', value: 'TL' }])
+    },[stateData])
 
     useEffect(()=>{
         if(editedObj && buttonAction === 'EDIT'){
@@ -91,7 +97,7 @@ const TouristForm = (props:any) => {
                                 showSearch
                                 placeholder="Select State"
                                 optionFilterProp="label"
-                                options={statesList}
+                                options={stateData}
                             />
                         </Form.Item>
 

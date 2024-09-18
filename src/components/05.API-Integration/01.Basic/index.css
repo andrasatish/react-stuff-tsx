@@ -1,0 +1,20 @@
+.post-cards{
+    display: flex;
+    flex-wrap: wrap;
+}
+.post-item{
+    width: 30%;
+    background-color: cornflowerblue;
+    color: #FFFF;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.post-title{
+    font-size: 22px;
+    color: rebeccapurple;
+}
+
+.post-description{
+    text-align: justify;
+}

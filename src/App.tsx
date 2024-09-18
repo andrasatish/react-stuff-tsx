@@ -6,6 +6,7 @@ import PropsNested from './components/03.props-drilling/props-nested';
 import Admin from './components/04.userdata-context/admin/admin';
 import { CompanyProvider } from './components/04.userdata-context/context/companyPortalContext';
 import TouristContainer from './components/04.userdata-context/tourist-detail-context/tourist-contianer';
+import BasicAPIIntegration from './components/05.API-Integration/01.Basic';
 
 function App() {
   const [username, setUsername] = useState('SUDHEER');
@@ -26,12 +27,18 @@ function App() {
          
     // </>
 
-    // Context
+    // Context - 1
     // <CompanyProvider>
     //   <Admin />
     // </CompanyProvider>
 
-    <TouristContainer />
+    // Context - 2
+    // <TouristContainer />
+
+    <BasicAPIIntegration />
+
+
+
   );
 }
 
