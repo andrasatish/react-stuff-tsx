@@ -19,6 +19,27 @@ const TouristTable = () => {
         })
     }
 
+    useEffect(()=>{
+        getTouristData();
+    },[]);
+
+    const getTouristData = () => {
+        fetch('http://localhost:3000/touristList').then((response:any)=>{
+            if(response.ok){
+                return response.json();
+            }else{
+                throw new Error(response.statusText);
+            }
+        }).then((data:any)=>{
+            setTouristList(data);
+        }).catch((err:any)=>{
+            setAlertData({
+                alertOpen: true,
+                title: err.message
+            });
+        })
+    }
+
     useEffect(() => {
         if (modalActions && modalActions === 'OK') {
             switch (modalConfig?.action) {
@@ -43,7 +64,7 @@ const TouristTable = () => {
                     })
                     setTouristList(updatedTouristData);
                     setAlertData({
-                        alertOpen : true,
+                        alertOpen: true,
                         title: `${modalConfig.data.name} details updated successfully!!`
                     });
                     setEditedObj(null);
@@ -52,18 +73,18 @@ const TouristTable = () => {
                     const updatedTourists = touristList.filter((tourist: any) => tourist.id !== modalConfig.data.id);
                     setTouristList(updatedTourists);
                     setAlertData({
-                        alertOpen : true,
+                        alertOpen: true,
                         title: `${modalConfig.data.name} details deleted successfully!!`
                     });
                     break;
                 default:
                     console.log('Related Actions not performed!!');
             }
-            setTimeout(()=>{
+            setTimeout(() => {
                 setModalConfig();
                 setModalActions();
                 setAlertData();
-            },500);
+            }, 500);
         }
     }, [modalActions, modalConfig])
 
@@ -74,17 +95,20 @@ const TouristTable = () => {
         console.log('PAYLOAD', payload);
 
         fetch('http://localhost:3000/touristList', {
-            method : 'POST',
+            method: 'POST',
             body: JSON.stringify(payload)
-        }).then((response)=> {
-            if(response.ok){
-                return response.json()
-            }else{
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
                 throw new Error(response.statusText);
             }
-        }).then((res)=>{
-            if(res){
-                alert('Data saved successfully');
+        }).then((res) => {
+            if (res) {
+                setAlertData({
+                    alertOpen: true,
+                    title: `${modalConfig.data.name} details saved successfully!!`
+                });
             }
         })
 
