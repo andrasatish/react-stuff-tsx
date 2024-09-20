@@ -7,6 +7,7 @@ import Admin from './components/04.userdata-context/admin/admin';
 import { CompanyProvider } from './components/04.userdata-context/context/companyPortalContext';
 import TouristContainer from './components/04.userdata-context/tourist-detail-context/tourist-contianer';
 import BasicAPIIntegration from './components/05.API-Integration/01.Basic';
+import TouristAPIIntegration from './components/05.API-Integration/02.Tourist/tourist-detail-context/tourist-contianer';
 
 function App() {
   const [username, setUsername] = useState('SUDHEER');
@@ -35,10 +36,9 @@ function App() {
     // Context - 2
     // <TouristContainer />
 
-    <BasicAPIIntegration />
-
-
-
+    //API Integration
+    // <BasicAPIIntegration />
+    <TouristAPIIntegration />
   );
 }
 

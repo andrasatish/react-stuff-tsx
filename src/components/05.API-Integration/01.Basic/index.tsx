@@ -6,12 +6,19 @@ const BasicAPIIntegration = () => {
 
     useEffect(()=>{
         fetch('https://dummyjson.com/posts').then((response:any)=>{
+            // console.log('RESPONSE',response)
             if(response.ok){
                 return response.json();
+            }else{
+                throw new Error(response.statusText);
             }
         }).then((data:any)=>{
             console.log('DATA....', data)
             setPosts(data?.posts);
+        }).catch((err)=>{
+            // console.log(err);
+            const errorMsg = err.message;
+            alert(errorMsg);
         })
 
 

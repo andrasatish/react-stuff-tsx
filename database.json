@@ -19,22 +19,38 @@
   "gender": [
     {
       "label": "Male",
-      "value": "male"
+      "value": "male",
+      "id": "c5be"
     },
     {
       "label": "Female",
-      "value": "female"
+      "value": "female",
+      "id": "c4cd"
     }
   ],
   "placeTypes": [
     {
       "label": "Public Visit",
-      "value": "public"
+      "value": "public",
+      "id": "d60a"
     },
     {
       "label": "Priavate Visit",
-      "value": "private"
+      "value": "private",
+      "id": "f1af"
     }
   ],
-  "touristList": []
+  "touristList": [
+    {
+      "id": "dd77",
+      "name": "Sudheer",
+      "location": "Hyderabad",
+      "age": 23,
+      "state": "TL",
+      "gender": "male",
+      "placeType": [
+        "public"
+      ]
+    }
+  ]
 }
