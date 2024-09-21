@@ -56,6 +56,26 @@ Ex: const [userName, setUserName] = useState('');
  > Using useContext hook we can access the context state. useProvider is used to wrap the child elements so that we can manage the state in that level.
  > How to create context API means we can use createContext and we can store in one variable and we can create one callback function which is related to Provider and both context and provider we have export it then we can use it in other components.
 
+10. How to handle API's and what are the methods?
+ > Basically we can handle API call using four methods GET,POST,PUT and DELETE.
+ > GET means we can fetch/retreive the data from the backend api(API Endpoint)
+ > POST means we can send the details/payload/request object to the API, Inorder to save the details in DB.
+ > PUT means, If you want to update the existing details we can use PUT API.
+ > DELETE means, We can delete the existing details.
+ > We can handle API's in different ways:
+    > Promise (fetch)
+    > async/await (fetch)
+    > axios (axios.get, axios.put, axios.post, axios.delete)
+
+NOTE: For request we have different properties. method, body, headers
+
+11. Reusable or Custom Hooks?
+ > We can create our own hooks based on requirement and we can create this hooks as reusable that means we can use it n no.of times.
+ > This hooks starts with use and after this we can place our reusable name.
+ > Usally Hooks we can't use inside other functions, we need to declare hooks at declaration part.
+ 
+ Ex: I was created a custom hooks for GET, PUT, POST and DELETE. 
+
 
 JUST KNOWN:
 ============

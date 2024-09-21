@@ -1,9 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Space } from 'antd';
 import { TouristContext } from "../touristContext";
+import apiHooks from '../reusable-custom-hooks/hooks';
 
 const TouristTable = () => {
-
+    const [ url, setUrl ] = useState<any>();
+    const { data, error } = apiHooks.useGET(url);
     const { touristList, setEditedObj, setTouristList, modalActions, modalConfig, setModalConfig, setModalActions, setAlertData } = useContext<any>(TouristContext);
 
     const onEdit = (touristData: any) => {
@@ -24,27 +26,36 @@ const TouristTable = () => {
     },[]);
 
     const getTouristData = () => {
-        fetch('http://localhost:3000/touristList').then((response:any)=>{
-            if(response.ok){
-                return response.json();
-            }else{
-                throw new Error(response.statusText);
-            }
-        }).then((data:any)=>{
-            setTouristList(data);
-        }).catch((err:any)=>{
-            setAlertData({
-                alertOpen: true,
-                title: err.message
-            });
-        })
+        // fetch('http://localhost:3000/touristList').then((response:any)=>{
+        //     if(response.ok){
+        //         return response.json();
+        //     }else{
+        //         throw new Error(response.statusText);
+        //     }
+        // }).then((data:any)=>{
+        //     setTouristList(data);
+        // }).catch((err:any)=>{
+        //     setAlertData({
+        //         alertOpen: true,
+        //         title: err.message
+        //     });
+        // })
+        setUrl('http://localhost:3000/touristList');
     }
+
+    useEffect(()=>{
+        if(data){
+            setTouristList(data);
+            setUrl('');
+        }
+    },[data])
 
     useEffect(() => {
         if (modalActions && modalActions === 'OK') {
             switch (modalConfig?.action) {
                 case 'SUBMIT':
                     touristSaveDetails();
+                    getTouristData();
                     // const updateDataWithId = { ...modalConfig.data, id: Math.floor(Math.random() * 1000) };
                     // const newData = [updateDataWithId, ...touristList];
                     // setTouristList(newData);
@@ -54,28 +65,32 @@ const TouristTable = () => {
                     // });
                     break;
                 case 'UPDATE':
-                    console.log('UPDATED DETAILS ', touristList, modalConfig)
-                    const updatedTouristData = touristList.map((tourist: any) => {
-                        if (tourist.id === modalConfig.data.id) {
-                            return modalConfig?.data
-                        } else {
-                            return tourist;
-                        }
-                    })
-                    setTouristList(updatedTouristData);
-                    setAlertData({
-                        alertOpen: true,
-                        title: `${modalConfig.data.name} details updated successfully!!`
-                    });
-                    setEditedObj(null);
+                     updateTouristData();
+                     getTouristData();
+                    // console.log('UPDATED DETAILS ', touristList, modalConfig)
+                    // const updatedTouristData = touristList.map((tourist: any) => {
+                    //     if (tourist.id === modalConfig.data.id) {
+                    //         return modalConfig?.data
+                    //     } else {
+                    //         return tourist;
+                    //     }
+                    // })
+                    // setTouristList(updatedTouristData);
+                    // setAlertData({
+                    //     alertOpen: true,
+                    //     title: `${modalConfig.data.name} details updated successfully!!`
+                    // });
+                    // setEditedObj(null);
                     break;
                 case 'DELETE':
-                    const updatedTourists = touristList.filter((tourist: any) => tourist.id !== modalConfig.data.id);
-                    setTouristList(updatedTourists);
-                    setAlertData({
-                        alertOpen: true,
-                        title: `${modalConfig.data.name} details deleted successfully!!`
-                    });
+                    deleteTouristData();
+                    getTouristData();
+                    // const updatedTourists = touristList.filter((tourist: any) => tourist.id !== modalConfig.data.id);
+                    // setTouristList(updatedTourists);
+                    // setAlertData({
+                    //     alertOpen: true,
+                    //     title: `${modalConfig.data.name} details deleted successfully!!`
+                    // });
                     break;
                 default:
                     console.log('Related Actions not performed!!');
@@ -108,6 +123,58 @@ const TouristTable = () => {
                 setAlertData({
                     alertOpen: true,
                     title: `${modalConfig.data.name} details saved successfully!!`
+                });
+            }
+        })
+
+    }
+
+    const updateTouristData = () => {
+
+        const payload = modalConfig.data;
+        console.log(' PAYLOAD UPDATE', payload);
+
+        fetch(`http://localhost:3000/touristList/${payload.id}`, {
+            method: 'PUT',
+            body: JSON.stringify(payload)
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        }).then((res) => {
+            if (res) {
+                setAlertData({
+                    alertOpen: true,
+                    title: `${modalConfig.data.name} details updated successfully!!`
+                });
+            }
+        })
+
+    }
+
+    const deleteTouristData = () => {
+
+        const payload = modalConfig.data;
+        
+        fetch(`http://localhost:3000/touristList/${payload.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'token': 'test_token'
+            }
+        }).then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error(response.statusText);
+            }
+        }).then((res) => {
+            if (res) {
+                setAlertData({
+                    alertOpen: true,
+                    title: `${modalConfig.data.name} details deleted successfully!!`
                 });
             }
         })
