@@ -6,6 +6,8 @@ import apiHooks from '../reusable-custom-hooks/hooks';
 const TouristTable = () => {
     const [ url, setUrl ] = useState<any>();
     const { data, error } = apiHooks.useGET(url);
+    const [ postUrl, setPostUrl ] = useState<any>();
+    const { postData, postError } = apiHooks.usePOST(postUrl);
     const { touristList, setEditedObj, setTouristList, modalActions, modalConfig, setModalConfig, setModalActions, setAlertData } = useContext<any>(TouristContext);
 
     const onEdit = (touristData: any) => {
@@ -105,6 +107,11 @@ const TouristTable = () => {
 
 
     const touristSaveDetails = () => {
+        // setPostUrl({
+        //     url:'http://localhost:3000/touristList',
+        //     method: 'POST',
+        //     body: JSON.stringify(modalConfig.data)
+        // });
 
         const payload = modalConfig.data;
         console.log('PAYLOAD', payload);
