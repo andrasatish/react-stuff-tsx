@@ -38,7 +38,7 @@ const usePOST = (postBodyDetails: PostBodyDetails) => {
     const [postError, setPostError] = useState<any>();
 
     useEffect(() => {
-        if(postBodyDetails.url) {
+        if(postBodyDetails?.url) {
             fetch(postBodyDetails.url, postBodyDetails.bodyDetails).then((response: any) => {
                 if (response.ok) {
                     return response.json();
@@ -51,7 +51,7 @@ const usePOST = (postBodyDetails: PostBodyDetails) => {
                 setPostError(err);
             })
         }
-    }, [postBodyDetails.url]);
+    }, [postBodyDetails?.url]);
 
     return { postData, postError }
 }
