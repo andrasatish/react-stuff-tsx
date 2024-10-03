@@ -1,0 +1,27 @@
+.posts-wrapper {
+    display: flex;
+    width: 90%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.post-item {
+    background-color: whitesmoke;
+    border-radius: 7px;
+    margin: 5px;
+    padding: 10px;
+    width: 30%;
+    cursor: pointer;
+}
+
+.title-bolder {
+    font-weight: bolder;
+    text-transform: uppercase;
+}
+
+.tag-pills {
+    background-color: rgb(173, 168, 168);
+    margin-right: 3px;
+    padding: 5px;
+    border-radius: 4px;
+}

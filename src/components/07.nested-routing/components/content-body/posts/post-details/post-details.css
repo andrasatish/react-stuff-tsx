@@ -1,0 +1,14 @@
+.post-item-wrapper{
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    background-color: rgb(59, 55, 55);
+    color: white;
+    border-radius: 10px;
+}
+
+.post-reactions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}

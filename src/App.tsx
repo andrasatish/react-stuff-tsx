@@ -8,7 +8,8 @@ import { CompanyProvider } from './components/04.userdata-context/context/compan
 import TouristContainer from './components/04.userdata-context/tourist-detail-context/tourist-contianer';
 import BasicAPIIntegration from './components/05.API-Integration/01.Basic';
 import TouristAPIIntegration from './components/05.API-Integration/02.Tourist/tourist-detail-context/tourist-contianer';
-import AppRouting from './components/06.routing/01.app-routing';
+import AppRouting from './components/07.nested-routing/01.app-routing';
+// import AppRouting from './components/06.routing/01.app-routing';
 
 function App() {
   const [username, setUsername] = useState('SUDHEER');
